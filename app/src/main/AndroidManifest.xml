@@ -2,11 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+    <!-- Application -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,36 +19,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LocationTrack"
         tools:targetApi="31">
+
+        <!-- API Key -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA8uEJInD7yd1J8_xC1Trx2QPwGldSox38" />
+
+        <!-- Activities -->
         <activity
-            android:name=".ViewServiceReqActivity"
+            android:name=".ReceiveLocation"
             android:exported="false" />
-        <activity
-            android:name=".LoginAdminActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginUserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LandingPageActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DetailsRouteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ServiceRequestActivity"
-            android:exported="false" />
-        <activity
-            android:name=".UserHomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".UserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DriverActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AdminHome"
-            android:exported="false" />
+        <!-- ... (other activities) ... -->
 
         <service
             android:name=".MyFirebaseMessagingService"
@@ -56,19 +39,27 @@
             </intent-filter>
         </service>
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCh-auDpbvWyBBVVOK0OAajGbt-onM_Tos" />
 
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MapsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_maps"
+            android:theme="@style/Base.Theme.LocationTrack">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
     </application>
 
 </manifest>

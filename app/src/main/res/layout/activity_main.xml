@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/container_layout"
     android:gravity="center"
     tools:context=".MainActivity">
 
@@ -29,5 +30,19 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="user" />
+
+    <Button
+        android:id="@+id/receivelocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="user" />
+
+    <Button
+        android:id="@+id/showMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="showMap" />
 
 </LinearLayout>
