@@ -27,9 +27,42 @@
 
         <!-- Activities -->
         <activity
-            android:name=".ReceiveLocation"
+            android:name=".LoginUserActivity"
             android:exported="false" />
-        <!-- ... (other activities) ... -->
+
+        <activity
+            android:name=".UserHomeActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".LandingPageActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".AdminHome"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".DetailsRouteActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".LoginAdminActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".ServiceRequestActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".ViewServiceReqActivity"
+            android:exported="false">
+        </activity>
 
         <service
             android:name=".MyFirebaseMessagingService"

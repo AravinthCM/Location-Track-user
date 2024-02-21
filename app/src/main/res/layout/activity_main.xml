@@ -17,28 +17,6 @@
         android:text="Button" />
 
     <Button
-        android:id="@+id/driver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="driver" />
-
-
-    <Button
-        android:id="@+id/user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="user" />
-
-    <Button
-        android:id="@+id/receivelocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="user" />
-
-    <Button
         android:id="@+id/showMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

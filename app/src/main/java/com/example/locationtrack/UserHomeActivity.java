@@ -1,18 +1,19 @@
 package com.example.locationtrack;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
@@ -26,6 +27,7 @@ public class UserHomeActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     NavigationView navigationView;
     TextView text;
+    LinearLayout routeTrack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +41,20 @@ public class UserHomeActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(UserHomeActivity.this,drawerLayout,materialToolbar,R.string.drawer_close,R.string.drawer_open);
         drawerLayout.addDrawerListener(toggle);
 
+        routeTrack=findViewById(R.id.routeTrack);
+        routeTrack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserHomeActivity.this,LandingPageActivity.class);
+                startActivity(intent);
+            }
+        });
+
         txt=findViewById(R.id.track);
         txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(UserHomeActivity.this,DriverActivity.class);
+                Intent intent=new Intent(UserHomeActivity.this,MapsActivity.class);
                 startActivity(intent);
             }
         });
@@ -52,7 +63,7 @@ public class UserHomeActivity extends AppCompatActivity {
         img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(UserHomeActivity.this,DriverActivity.class);
+                Intent intent=new Intent(UserHomeActivity.this,MapsActivity.class);
                 startActivity(intent);
             }
         });
