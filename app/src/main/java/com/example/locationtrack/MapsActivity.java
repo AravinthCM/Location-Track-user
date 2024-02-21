@@ -1,7 +1,6 @@
 package com.example.locationtrack;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,11 +16,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -36,7 +32,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps);
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("driver_locations").child("driver1UID");
+        databaseReference = firebaseDatabase.getReference("drivers");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,37 +49,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Set the default map type to hybrid
         gMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    // Check if latitude and longitude child nodes exist
-                    if (snapshot.hasChild("latitude") && snapshot.hasChild("longitude")) {
-                        // Retrieve latitude and longitude values
-                        Double latitude = snapshot.child("latitude").getValue(Double.class);
-                        Double longitude = snapshot.child("longitude").getValue(Double.class);
+        // Retrieve latitude and longitude from the intent
+        double latitude = getIntent().getDoubleExtra("latitude", 0.0);
+        double longitude = getIntent().getDoubleExtra("longitude", 0.0);
 
-                        Log.d("MapsActivity", "Latitude: " + latitude + ", Longitude: " + longitude);
-
-                        // Check if gMap is not null before adding marker and moving camera
-                        if (gMap != null) {
-                            LatLng userLocation = new LatLng(latitude, longitude);
-                            gMap.addMarker(new MarkerOptions().position(userLocation).title("Marker at User Location"));
-                            gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 18.0f));
-                        }
-                    } else {
-                        Log.e("MapsActivity", "Latitude or longitude child nodes are missing");
-                        // Handle the case when latitude or longitude child nodes are missing
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Handle error
-                Log.e("MapsActivity", "Database error: " + error.getMessage());
-            }
-        });
+        if (gMap != null) {
+            LatLng busLocation = new LatLng(latitude, longitude);
+            gMap.addMarker(new MarkerOptions().position(busLocation).title("Bus Location"));
+            gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(busLocation, 18.0f));
+        }
     }
 
 
