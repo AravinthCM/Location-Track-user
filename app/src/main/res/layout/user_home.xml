@@ -202,6 +202,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/trackBus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -309,6 +310,7 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/serviceLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -373,8 +375,8 @@
             app:itemTextColor="@color/black"
             app:menu="@menu/nav_menu" />
 
-    </androidx.drawerlayout.widget.DrawerLayout>
 
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 
 </LinearLayout>

@@ -27,7 +27,7 @@ public class UserHomeActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     NavigationView navigationView;
     TextView text;
-    LinearLayout routeTrack;
+    LinearLayout routeTrack,trackBus,serviceLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,8 @@ public class UserHomeActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
 
         routeTrack=findViewById(R.id.routeTrack);
+        trackBus=findViewById(R.id.trackBus);
+        serviceLayout=findViewById(R.id.serviceLayout);
         routeTrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,42 +52,20 @@ public class UserHomeActivity extends AppCompatActivity {
             }
         });
 
-        txt=findViewById(R.id.track);
-        txt.setOnClickListener(new View.OnClickListener() {
+        trackBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(UserHomeActivity.this,MapsActivity.class);
+                Intent intent = new Intent(UserHomeActivity.this,MapsActivity.class);
                 startActivity(intent);
             }
         });
-
-        ImageView img2=findViewById(R.id.bus);
-        img2.setOnClickListener(new View.OnClickListener() {
+        serviceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(UserHomeActivity.this,MapsActivity.class);
+                Intent intent = new Intent(UserHomeActivity.this,ServiceRequestActivity.class);
                 startActivity(intent);
             }
         });
-
-        img=findViewById(R.id.serviceReq);
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(UserHomeActivity.this,ServiceRequestActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        ImageView bus=findViewById(R.id.documentSub);
-        img2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(UserHomeActivity.this,LandingPageActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
         materialToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
