@@ -50,6 +50,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.gMap = googleMap;
 
+        // Set the default map type to hybrid
+        gMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -82,6 +85,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
