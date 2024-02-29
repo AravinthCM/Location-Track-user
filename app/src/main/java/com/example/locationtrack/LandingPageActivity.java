@@ -26,7 +26,7 @@ public class LandingPageActivity extends AppCompatActivity {
     private ListView busListView;
     private SearchView searchView;
     private ArrayAdapter<String> adapter;
-
+    private CustomBusAdapter adapter2;
     private List<String> busList;
     private List<String> filteredBusList;
 
@@ -37,6 +37,8 @@ public class LandingPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.landing_page);
+
+
 
         // Initialize Firebase
         firebaseDatabase = FirebaseDatabase.getInstance().getReference("drivers");
@@ -52,14 +54,11 @@ public class LandingPageActivity extends AppCompatActivity {
                 "Bus 25", "Bus 26", "Bus 27", "Bus 28",
                 "Bus 29", "Bus 30", "Bus 31", "Bus 32"));
         filteredBusList = new ArrayList<>(busList);
-
         busListView = findViewById(R.id.busListView);
         searchView = findViewById(R.id.searchView);
+        adapter2 = new CustomBusAdapter(this, R.layout.bus_item, filteredBusList);
+        busListView.setAdapter(adapter2);
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, filteredBusList);
-        busListView.setAdapter(adapter);
-
-        // Set up search functionality
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -90,7 +89,7 @@ public class LandingPageActivity extends AppCompatActivity {
             }
         }
 
-        adapter.notifyDataSetChanged();
+        adapter2.notifyDataSetChanged();
     }
 
     private void displayBusLocation(String selectedBus) {

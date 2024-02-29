@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -27,7 +28,8 @@ public class UserHomeActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     NavigationView navigationView;
     TextView text;
-    LinearLayout routeTrack,trackBus,serviceLayout;
+    LinearLayout routeTrack,trackBus;
+    CardView serviceLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class UserHomeActivity extends AppCompatActivity {
 
         routeTrack=findViewById(R.id.routeTrack);
         trackBus=findViewById(R.id.trackBus);
-        serviceLayout=findViewById(R.id.serviceLayout);
+        serviceLayout=findViewById(R.id.cardREQ);
         routeTrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

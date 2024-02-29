@@ -9,4 +9,13 @@
     <string name="satellite_map">satellite_map</string>
     <string name="terrain_map">terrain_map</string>
 
+    <string name="ek_img_content">ExportKit Image</string>
+    <string name="hi_name_string">HI NAME</string>
+    <string name="welcome_to_home_string">Welcome to Home</string>
+    <string name="travel_string">Travel</string>
+    <string name="routes_of_bus_string">Routes of Bus</string>
+    <string name="track_your_bus_string">Track your Bus</string>
+    <string name="service_request_string">Service Request </string>
+    <string name="your_profile_string">YourProfile</string>
+    <string name="logout_string">Logout</string>
 </resources>

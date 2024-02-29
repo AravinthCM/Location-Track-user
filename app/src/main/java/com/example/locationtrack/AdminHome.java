@@ -1,17 +1,19 @@
 package com.example.locationtrack;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,25 +29,46 @@ public class AdminHome extends AppCompatActivity {
     NavigationView navigationView;
     TextView text,text2;
 
+    LinearLayout routeTrack,trackBus;
+    CardView serviceLayout;
+    CardView publish;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_home);
 
-        text2=findViewById(R.id.servicetxt);
-        text2.setOnClickListener(new View.OnClickListener() {
+        publish=findViewById(R.id.publish);
+        publish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(AdminHome.this,ViewServiceReqActivity.class);
+                Intent intent = new Intent(AdminHome.this, PublishAnnouncement.class);
                 startActivity(intent);
             }
         });
 
-        TextView route=findViewById(R.id.route);
-        route.setOnClickListener(new View.OnClickListener() {
+        routeTrack=findViewById(R.id.routeTrack);
+        trackBus=findViewById(R.id.trackBus);
+        serviceLayout=findViewById(R.id.cardREQ);
+        routeTrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(AdminHome.this, LandingPageActivity.class);
+                Intent intent = new Intent(AdminHome.this,LandingPageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        trackBus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminHome.this,MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+        serviceLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminHome.this,ServiceRequestActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,15 +93,7 @@ public class AdminHome extends AppCompatActivity {
         navigationView=findViewById(R.id.navigationView);
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(AdminHome.this,drawerLayout,materialToolbar,R.string.drawer_close,R.string.drawer_open);
         drawerLayout.addDrawerListener(toggle);
-        text=findViewById(R.id.hello);
 
-        text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(AdminHome.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
         materialToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
