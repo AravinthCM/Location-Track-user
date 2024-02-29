@@ -32,11 +32,14 @@ public class AdminHome extends AppCompatActivity {
     LinearLayout routeTrack,trackBus;
     CardView serviceLayout;
     CardView publish;
+    CardView cardREQ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_home);
+
+        cardREQ=findViewById(R.id.cardREQ);
 
         publish=findViewById(R.id.publish);
         publish.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +52,6 @@ public class AdminHome extends AppCompatActivity {
 
         routeTrack=findViewById(R.id.routeTrack);
         trackBus=findViewById(R.id.trackBus);
-        serviceLayout=findViewById(R.id.cardREQ);
         routeTrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,10 +67,10 @@ public class AdminHome extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        serviceLayout.setOnClickListener(new View.OnClickListener() {
+        cardREQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminHome.this,ServiceRequestActivity.class);
+                Intent intent = new Intent(AdminHome.this,ViewServiceReqActivity.class);
                 startActivity(intent);
             }
         });

@@ -18,6 +18,9 @@
         android:theme="@style/Theme.LocationTrack"
         tools:targetApi="31">
         <activity
+            android:name=".BusdetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ExampppleActivity"
             android:exported="false" />
         <activity

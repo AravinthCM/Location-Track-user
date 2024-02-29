@@ -213,7 +213,7 @@
                                     android:layout_marginTop="85dp"
                                     android:layout_marginEnd="29dp"
                                     android:fontFamily="sans-serif-medium"
-                                    android:text="@string/service_request_string"
+                                    android:text="View requests"
                                     android:textColor="@color/hi_name_color"
                                     android:textSize="20dp" />
 

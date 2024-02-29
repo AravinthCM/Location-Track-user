@@ -57,7 +57,7 @@ public class UserHomeActivity extends AppCompatActivity {
         trackBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserHomeActivity.this,MapsActivity.class);
+                Intent intent = new Intent(UserHomeActivity.this,BusdetailsActivity.class);
                 startActivity(intent);
             }
         });
