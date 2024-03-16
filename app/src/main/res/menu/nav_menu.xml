@@ -18,12 +18,6 @@
             android:icon="@drawable/admin"
             android:title="About" />
 
-        <item
-            android:id="@+id/nav_help"
-            android:iconTint="@color/black"
-            android:icon="@drawable/admin"
-            android:title="Help" />
-
     </group>
 
     <group

@@ -18,6 +18,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserHomeActivity extends AppCompatActivity {
 
@@ -46,6 +51,28 @@ public class UserHomeActivity extends AppCompatActivity {
         routeTrack=findViewById(R.id.routeTrack);
         trackBus=findViewById(R.id.trackBus);
         serviceLayout=findViewById(R.id.cardREQ);
+
+        // Inside onCreate method
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Announcement");
+
+        databaseReference.limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String latestAnnouncement = snapshot.child("announce").getValue(String.class);
+
+                    // Assuming you have a TextView with id "Announcement" in your layout
+                    TextView announcementTextView = findViewById(R.id.Announcement);
+                    announcementTextView.setText(latestAnnouncement);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+            }
+        });
+
         routeTrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

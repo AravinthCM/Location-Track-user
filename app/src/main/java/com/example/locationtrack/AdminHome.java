@@ -19,6 +19,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class AdminHome extends AppCompatActivity {
@@ -42,6 +47,27 @@ public class AdminHome extends AppCompatActivity {
         cardREQ=findViewById(R.id.cardREQ);
 
         publish=findViewById(R.id.publish);
+
+        // Inside onCreate method
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Announcement");
+        databaseReference.limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String latestAnnouncement = snapshot.child("announce").getValue(String.class);
+
+                    // Assuming you have a TextView with id "Announcement" in your layout
+                    TextView announcementTextView = findViewById(R.id.Announcement);
+                    announcementTextView.setText(latestAnnouncement);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+            }
+        });
+
         publish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

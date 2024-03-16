@@ -11,9 +11,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LocationTrack"
         tools:targetApi="31">
@@ -21,14 +19,11 @@
             android:name=".BusdetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".ExampppleActivity"
-            android:exported="false" />
-        <activity
             android:name=".PublishAnnouncement"
             android:exported="false" /> <!-- API Key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA8uEJInD7yd1J8_xC1Trx2QPwGldSox38" /> <!-- Activities -->
+            android:value="AIzaSyA8uEJInD7yd1J8_xC1Trx2QPwGldSox38" />
         <activity
             android:name=".LoginUserActivity"
             android:exported="false" />
@@ -67,21 +62,21 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MapsActivity"
             android:exported="true"
-            android:label="@string/title_activity_maps"
-            android:theme="@style/Base.Theme.LocationTrack">
+            android:theme="@style/SplashTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
     </application>
 
 </manifest>
