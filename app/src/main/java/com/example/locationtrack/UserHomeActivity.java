@@ -60,16 +60,12 @@ public class UserHomeActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String latestAnnouncement = snapshot.child("announce").getValue(String.class);
-
-                    // Assuming you have a TextView with id "Announcement" in your layout
                     TextView announcementTextView = findViewById(R.id.Announcement);
                     announcementTextView.setText(latestAnnouncement);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle error
             }
         });
 
@@ -77,6 +73,16 @@ public class UserHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserHomeActivity.this,LandingPageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView profile=findViewById(R.id.profile);
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserHomeActivity.this,ProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -103,6 +109,9 @@ public class UserHomeActivity extends AppCompatActivity {
                 if (item.getItemId()==R.id.nav_admin){
                     startActivity(new Intent(UserHomeActivity.this, MainActivity.class));
                     return true;
+                } else if (item.getItemId()==R.id.nav_logout) {
+                    logout();
+                    return true;
                 }
                 return false;
             }
@@ -118,6 +127,19 @@ public class UserHomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+    }
+    private void logout() {
+        Intent intent = new Intent(UserHomeActivity.this, LoginUserActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
 

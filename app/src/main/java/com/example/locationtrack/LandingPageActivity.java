@@ -29,21 +29,12 @@ public class LandingPageActivity extends AppCompatActivity {
     private CustomBusAdapter adapter2;
     private List<String> busList;
     private List<String> filteredBusList;
-
-    // Reference to Firebase database
     private DatabaseReference firebaseDatabase;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.landing_page);
-
-
-
-        // Initialize Firebase
         firebaseDatabase = FirebaseDatabase.getInstance().getReference("drivers");
-
-        // Assuming you have a list of bus names, update it accordingly
         busList = new ArrayList<>(Arrays.asList(
                 "Bus 1", "Bus 2", "Bus 3", "Bus 4",
                 "Bus 5", "Bus 6", "Bus 7", "Bus 8",
@@ -58,7 +49,6 @@ public class LandingPageActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
         adapter2 = new CustomBusAdapter(this, R.layout.bus_item, filteredBusList);
         busListView.setAdapter(adapter2);
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -71,15 +61,11 @@ public class LandingPageActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        // Set up item click listener
         busListView.setOnItemClickListener((parent, view, position, id) -> {
             String selectedBus = filteredBusList.get(position);
-            // Call a method to retrieve and display the location of the selected bus
             displayBusLocation(selectedBus);
         });
     }
-
     private void filterBusList(String query) {
         filteredBusList.clear();
 
@@ -88,12 +74,10 @@ public class LandingPageActivity extends AppCompatActivity {
                 filteredBusList.add(bus);
             }
         }
-
         adapter2.notifyDataSetChanged();
     }
 
     private void displayBusLocation(String selectedBus) {
-        // Query the Firebase database to get the location of the selected bus
         firebaseDatabase.orderByChild("busNo").equalTo(selectedBus).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
@@ -102,20 +86,15 @@ public class LandingPageActivity extends AppCompatActivity {
                             for (DataSnapshot driverSnapshot : snapshot.getChildren()) {
                                 Double latitude = driverSnapshot.child("latitude").getValue(Double.class);
                                 Double longitude = driverSnapshot.child("longitude").getValue(Double.class);
-
-                                // Log the retrieved values
                                 Log.d("BusLocation", "Latitude: " + latitude + ", Longitude: " + longitude);
-
-                                // Call a method to display the location on the map
                                 displayLocationOnMap(latitude, longitude);
-                                return;  // Break out of the loop if location is found
+                                return;
                             }
                             Toast.makeText(LandingPageActivity.this, "Location not available for " + selectedBus, Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(LandingPageActivity.this, "Driver data not found for " + selectedBus, Toast.LENGTH_SHORT).show();
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         Toast.makeText(LandingPageActivity.this, "Database error: " + error.getMessage(), Toast.LENGTH_SHORT).show();

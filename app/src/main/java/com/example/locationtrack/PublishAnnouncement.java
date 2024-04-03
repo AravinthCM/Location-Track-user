@@ -42,8 +42,6 @@ public class PublishAnnouncement extends AppCompatActivity {
             databaseReference.push().setValue(announceModel);
             announce.getEditText().setText("");
         } else {
-            // Handle the case when the announcement text is empty
-            // You can show an error message or take appropriate action
         }
     }
 }
