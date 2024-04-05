@@ -69,9 +69,9 @@ public class LoginUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!ValidateFullname()|!ValidatePassword()){
-
                 }else{
                     loginUser();
+                    progressBar.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -85,7 +85,7 @@ public class LoginUserActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressBar.setVisibility(View.VISIBLE);
+
 
                         if (task.isSuccessful()) {
                             progressBar.setVisibility(View.GONE);

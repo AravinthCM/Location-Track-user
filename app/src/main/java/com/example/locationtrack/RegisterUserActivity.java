@@ -3,7 +3,7 @@ package com.example.locationtrack;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText; // Changed from TextInputEditText to EditText
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,9 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterUserActivity extends AppCompatActivity {
 
-    private TextInputLayout emailInputLayout, rollNumberInputLayout, busNumberInputLayout, placeInputLayout, passwordInputLayout;
-    private EditText emailEditText, rollNumberEditText, busNumberEditText, placeEditText, passwordEditText; // Changed from TextInputEditText to EditText
-    private Button submitButton;
+    private EditText emailEditText, rollNumberEditText, busNumberEditText, placeEditText, passwordEditText;
+    private Button submitButton, alreadyRegisteredButton;
     private ProgressBar progressBar;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
@@ -33,19 +31,14 @@ public class RegisterUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_register);
 
-        emailInputLayout = findViewById(R.id.fullname);
-        rollNumberInputLayout = findViewById(R.id.Roll);
-        busNumberInputLayout = findViewById(R.id.Bus);
-        placeInputLayout = findViewById(R.id.Place);
-        passwordInputLayout = findViewById(R.id.passs1);
-
-        emailEditText = emailInputLayout.getEditText();
-        rollNumberEditText = rollNumberInputLayout.getEditText();
-        busNumberEditText = busNumberInputLayout.getEditText();
-        placeEditText = placeInputLayout.getEditText();
-        passwordEditText = passwordInputLayout.getEditText();
+        emailEditText = findViewById(R.id.emailEditText);
+        rollNumberEditText = findViewById(R.id.rollNumberEditText);
+        busNumberEditText = findViewById(R.id.busNumberEditText);
+        placeEditText = findViewById(R.id.placeEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
 
         submitButton = findViewById(R.id.sub2);
+        alreadyRegisteredButton = findViewById(R.id.already);
         progressBar = findViewById(R.id.progress1);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -55,6 +48,12 @@ public class RegisterUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 registerUser();
+            }
+        });
+
+        alreadyRegisteredButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
             }
         });
     }
@@ -80,19 +79,17 @@ public class RegisterUserActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = firebaseAuth.getCurrentUser();
                             if (user != null) {
-                                String userId = user.getUid();
-                                databaseReference.child(userId).setValue(new Student(email, rollNumber, busNumber, place))
+                                user.sendEmailVerification()
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Toast.makeText(RegisterUserActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                                                    progressBar.setVisibility(View.GONE);
-                                                    // Navigate to the next activity or finish this one
+                                                    Toast.makeText(RegisterUserActivity.this, "Verification email sent", Toast.LENGTH_SHORT).show();
+                                                    finish();
                                                 } else {
-                                                    Toast.makeText(RegisterUserActivity.this, "Failed to register", Toast.LENGTH_SHORT).show();
-                                                    progressBar.setVisibility(View.GONE);
+                                                    Toast.makeText(RegisterUserActivity.this, "Failed to send verification email", Toast.LENGTH_SHORT).show();
                                                 }
+                                                progressBar.setVisibility(View.GONE);
                                             }
                                         });
                             }

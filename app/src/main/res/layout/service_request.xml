@@ -13,14 +13,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="96dp"
-        android:background="@drawable/topbanner2"
         android:orientation="horizontal"
         android:padding="10dp">
 
         <ImageView
             android:id="@+id/previous"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="25dp"
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:src="@drawable/arrow_back" />
@@ -54,7 +53,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -63,7 +61,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Service Form"

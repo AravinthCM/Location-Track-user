@@ -223,16 +223,26 @@
 
                     </LinearLayout>
 
+                    <TextView
+                        android:id="@+id/travel123"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rectangle_2"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Service Request"
+                        android:textColor="@color/hi_name_color"
+                        android:textSize="25dp"/>
+
+
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardREQ"
                         android:layout_width="match_parent"
                         android:layout_height="181dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginEnd="0dp"
                         android:layout_marginTop="15dp"
-                        android:elevation="100dp"
-                        app:cardCornerRadius="40dp">
+                        android:layout_marginBottom="15dp"
+                        app:cardCornerRadius="20dp">
 
                         <View
                             android:layout_width="match_parent"
@@ -258,6 +268,7 @@
                             android:text="@string/service_request_string"
                             android:textColor="@color/hi_name_color"
                             android:textSize="30dp" />
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -268,8 +279,6 @@
                             android:text="request any services needed and the actions will be taken"
                             android:textColor="@color/hi_name_color"
                             android:textSize="13dp" />
-
-
 
                     </androidx.cardview.widget.CardView>
 
