@@ -10,8 +10,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:title="Your Title"
+        android:background="@color/grey"
+        app:title="SREC Bus tracking system"
+        app:subtitleTextAppearance="@style/TextAppearance.Material3.BodyLarge"
         app:titleTextColor="@android:color/black" />
 
     <fragment

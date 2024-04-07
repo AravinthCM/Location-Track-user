@@ -84,6 +84,8 @@ public class RegisterUserActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
+                                                    String userId = user.getUid();
+                                                    databaseReference.child(userId).setValue(new Student(email, rollNumber, busNumber, place));
                                                     Toast.makeText(RegisterUserActivity.this, "Verification email sent", Toast.LENGTH_SHORT).show();
                                                     finish();
                                                 } else {

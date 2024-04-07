@@ -37,6 +37,24 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:id="@+id/chooseFileBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose File"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/takePhotoBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Take Photo"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginTop="10dp"/>
+
+    <Button
         android:id="@+id/annBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,4 +62,11 @@
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
         android:layout_marginTop="10dp"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
 </LinearLayout>

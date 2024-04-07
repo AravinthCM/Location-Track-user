@@ -1,5 +1,7 @@
 package com.example.locationtrack;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +16,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -38,15 +42,24 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.gMap = googleMap;
-        gMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         double latitude = getIntent().getDoubleExtra("latitude", 0.0);
         double longitude = getIntent().getDoubleExtra("longitude", 0.0);
         if (gMap != null) {
             LatLng busLocation = new LatLng(latitude, longitude);
-            gMap.addMarker(new MarkerOptions().position(busLocation).title("Bus Location"));
+            BitmapDescriptor busIcon = getResizedBitmapDescriptor(R.drawable.busschool, 80, 80);
+            gMap.addMarker(new MarkerOptions().position(busLocation).title("Bus Location").icon(busIcon));
             gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(busLocation, 18.0f));
         }
     }
+
+    private BitmapDescriptor getResizedBitmapDescriptor(int resourceId, int width, int height) {
+        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), resourceId);
+        Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false);
+        return BitmapDescriptorFactory.fromBitmap(resizedBitmap);
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
