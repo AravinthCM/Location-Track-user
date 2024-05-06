@@ -78,7 +78,6 @@ public class PublishAnnouncement extends AppCompatActivity {
             }
         });
 
-        // Request permissions if not granted
         if (!checkPermissions()) {
             requestPermissions();
         }
@@ -86,18 +85,23 @@ public class PublishAnnouncement extends AppCompatActivity {
 
     private void pushAnnouncement(String announcementText) {
         if (!announcementText.trim().isEmpty()) {
-            AnnounceModel announceModel = new AnnounceModel(announcementText);
-            ref2.push().setValue(announceModel);
-            announce.getEditText().setText("");
-            Toast.makeText(this, "Text Announcement uploaded", Toast.LENGTH_SHORT).show();
+            String key = ref2.push().getKey(); // Generate a unique key
+            if (key != null) {
+                ref2.child(key).setValue(announcementText); // Set the announcement text directly under the unique key
+                announce.getEditText().setText("");
+                Toast.makeText(this, "Text Announcement uploaded", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Failed to generate unique key", Toast.LENGTH_SHORT).show();
+            }
         } else {
             Toast.makeText(this, "Please enter an announcement text", Toast.LENGTH_SHORT).show();
         }
     }
 
+
     private void openFilePicker() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("application/pdf"); // Filter for PDF files
+        intent.setType("application/pdf");
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE);
     }
 

@@ -6,21 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".MapsActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/grey"
-        app:title="SREC Bus tracking system"
-        app:subtitleTextAppearance="@style/TextAppearance.Material3.BodyLarge"
-        app:titleTextColor="@android:color/black" />
+        android:background="@color/_bg__iconamoon_home_thin_ek1_color"
+        android:layout_height="80dp">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/cardview_shadow_start_color"
+            app:title="SREC Bus tracking system"
+            android:gravity="center"
+            app:subtitleTextAppearance="@style/TextAppearance.Material3.BodyLarge"
+            app:titleTextColor="@android:color/white" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/swipe_refresh_layout"
         tools:context=".MapsActivity" />
 
 </RelativeLayout>
