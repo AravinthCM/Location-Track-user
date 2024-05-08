@@ -20,23 +20,16 @@ public class CustomBusAdapter extends ArrayAdapter<String> {
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.bus_item, parent, false);
         }
-
-        // Get the data item for this position
         String bus = getItem(position);
 
-        // Lookup view for data population
-        TextView tvBusName = convertView.findViewById(android.R.id.text1); // Use android.R.id.text1 here
-
-        // Populate the data into the template view using the data object
+        TextView tvBusName = convertView.findViewById(android.R.id.text1);
         if (bus != null) {
             tvBusName.setText(bus);
         }
 
-        // Return the completed view to render on screen
         return convertView;
     }
 }

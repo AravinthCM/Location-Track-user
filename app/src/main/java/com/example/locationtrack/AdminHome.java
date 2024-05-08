@@ -27,13 +27,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class AdminHome extends AppCompatActivity {
-
     DrawerLayout drawerLayout;
     MaterialToolbar materialToolbar;
     FrameLayout frameLayout;
     NavigationView navigationView;
     TextView text,text2;
-
     LinearLayout routeTrack,trackBus;
     CardView serviceLayout;
     CardView publish;
@@ -48,7 +46,6 @@ public class AdminHome extends AppCompatActivity {
 
         publish=findViewById(R.id.publish);
 
-        // Inside onCreate method
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Announcement");
         databaseReference.limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -56,7 +53,6 @@ public class AdminHome extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String latestAnnouncement = snapshot.child("announce").getValue(String.class);
 
-                    // Assuming you have a TextView with id "Announcement" in your layout
                     TextView announcementTextView = findViewById(R.id.Announcement);
                     announcementTextView.setText(latestAnnouncement);
                 }
@@ -64,7 +60,6 @@ public class AdminHome extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle error
             }
         });
 

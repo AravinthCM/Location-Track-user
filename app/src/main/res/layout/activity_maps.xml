@@ -9,7 +9,7 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:background="@color/_bg__iconamoon_home_thin_ek1_color"
+        android:background="@color/grey"
         android:layout_height="80dp">
 
         <androidx.appcompat.widget.Toolbar

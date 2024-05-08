@@ -39,8 +39,6 @@ public class CustomAdapter extends ArrayAdapter<UserData> {
         UserData userData = userDataList.get(position);
         nameTextView.setText(userData.getName());
         emailTextView.setText(userData.getEmailAddress());
-
-        // Convert Long to String before setting it to TextView
         String busNumberString = String.valueOf(userData.getBusNumber());
         busNumberTextView.setText(busNumberString);
 

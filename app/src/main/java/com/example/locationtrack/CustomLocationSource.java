@@ -8,7 +8,6 @@ public class CustomLocationSource implements LocationSource {
     private OnLocationChangedListener onLocationChangedListener;
 
     public CustomLocationSource() {
-        // Constructor without parameters
     }
 
     @Override
@@ -23,7 +22,7 @@ public class CustomLocationSource implements LocationSource {
 
     public void updateLocation(LatLng latLng) {
         if (onLocationChangedListener != null) {
-            onLocationChangedListener.onLocationChanged(null); // pass null for the location source
+            onLocationChangedListener.onLocationChanged(null);
         }
     }
 }

@@ -35,6 +35,7 @@ public class UserHomeActivity extends AppCompatActivity {
     TextView text;
     LinearLayout routeTrack,trackBus;
     CardView serviceLayout;
+    OnBackPressedListener onBackPressedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,6 @@ public class UserHomeActivity extends AppCompatActivity {
         trackBus=findViewById(R.id.trackBus);
         serviceLayout=findViewById(R.id.cardREQ);
 
-        // Inside onCreate method
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Announcement");
 
         databaseReference.limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -116,7 +116,6 @@ public class UserHomeActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -134,27 +133,17 @@ public class UserHomeActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+        onBackPressedListener = null;
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+        if (onBackPressedListener != null) {
+            super.onBackPressed();
+        }
+    }
+
+    public interface OnBackPressedListener {
+        void doBack();
     }
 }
-
-
-/*
-
-<com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigationView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:headerLayout="@layout/nav_header"
-            android:background="@color/plpl"
-            app:itemIconTint="@color/black"
-            app:itemTextColor="@color/black"
-            app:menu="@menu/nav_menu" />
-
-*/

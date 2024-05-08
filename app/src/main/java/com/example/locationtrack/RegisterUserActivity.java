@@ -19,7 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterUserActivity extends AppCompatActivity {
-
     private EditText emailEditText, rollNumberEditText, busNumberEditText, placeEditText, passwordEditText;
     private Button submitButton, alreadyRegisteredButton;
     private ProgressBar progressBar;

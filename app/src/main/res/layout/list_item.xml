@@ -24,6 +24,4 @@
         android:layout_height="wrap_content"
         android:text="Bus Number: "/>
 
-    <!-- Add TextViews for other user data such as Place, Roll Number, and Year -->
-
 </LinearLayout>
