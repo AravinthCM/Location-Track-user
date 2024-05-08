@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -28,11 +27,10 @@ import com.google.firebase.storage.StorageReference;
 public class PublishAnnouncement extends AppCompatActivity {
 
     private static final int PICK_FILE_REQUEST_CODE = 100;
-    private static final int REQUEST_IMAGE_CAPTURE = 101;
     private static final int PERMISSION_REQUEST_CODE = 102;
 
     TextInputLayout announce;
-    Button chooseFileBtn, takePhotoBtn, annBtn;
+    Button chooseFileBtn, annBtn;
     DatabaseReference databaseReference;
     DatabaseReference ref2;
     StorageReference storageReference;
@@ -46,7 +44,6 @@ public class PublishAnnouncement extends AppCompatActivity {
 
         announce = findViewById(R.id.announce);
         chooseFileBtn = findViewById(R.id.chooseFileBtn);
-        takePhotoBtn = findViewById(R.id.takePhotoBtn);
         annBtn = findViewById(R.id.annBtn);
         progressBar = findViewById(R.id.progressBar);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Announcement");
@@ -57,13 +54,6 @@ public class PublishAnnouncement extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openFilePicker();
-            }
-        });
-
-        takePhotoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dispatchTakePictureIntent();
             }
         });
 
@@ -120,13 +110,6 @@ public class PublishAnnouncement extends AppCompatActivity {
         return result;
     }
 
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        }
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -138,17 +121,8 @@ public class PublishAnnouncement extends AppCompatActivity {
                     String fileName = getFileName(fileUri);
                     chooseFileBtn.setText(fileName); // Set the button text to the file name
                 }
-            } else if (requestCode == REQUEST_IMAGE_CAPTURE) {
-                Bundle extras = data.getExtras();
-                if (extras != null) {
-                    fileUri = saveImageToStorage((Uri) extras.get(MediaStore.EXTRA_OUTPUT));
-                }
             }
         }
-    }
-
-    private Uri saveImageToStorage(Uri photoUri) {
-        return photoUri;
     }
 
     private void uploadFileToStorage(Uri fileUri) {
@@ -179,12 +153,12 @@ public class PublishAnnouncement extends AppCompatActivity {
     }
 
     private boolean checkPermissions() {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
     private void requestPermissions() {
         ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.CAMERA
+                Manifest.permission.READ_EXTERNAL_STORAGE
         }, PERMISSION_REQUEST_CODE);
     }
 }

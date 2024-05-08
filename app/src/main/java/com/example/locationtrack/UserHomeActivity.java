@@ -53,13 +53,13 @@ public class UserHomeActivity extends AppCompatActivity {
         trackBus=findViewById(R.id.trackBus);
         serviceLayout=findViewById(R.id.cardREQ);
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Announcement");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Text Announcements");
 
         databaseReference.limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String latestAnnouncement = snapshot.child("announce").getValue(String.class);
+                    String latestAnnouncement = snapshot.getValue(String.class);
                     TextView announcementTextView = findViewById(R.id.Announcement);
                     announcementTextView.setText(latestAnnouncement);
                 }
@@ -83,6 +83,16 @@ public class UserHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserHomeActivity.this,ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        TextView pdf=findViewById(R.id.pdf);
+
+        pdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserHomeActivity.this,RetrievePdfActivity.class);
                 startActivity(intent);
             }
         });

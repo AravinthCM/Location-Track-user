@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BusdetailsActivity extends AppCompatActivity {
-
     private RecyclerView recyclerView;
     private DriverAdapter adapter;
     private List<DriverModel> driverList;
@@ -37,8 +36,6 @@ public class BusdetailsActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("drivers");
-
-        // Add a listener for the drivers node
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -49,10 +46,8 @@ public class BusdetailsActivity extends AppCompatActivity {
                 }
                 adapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle errors here
             }
         });
     }

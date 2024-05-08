@@ -7,10 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -18,8 +16,7 @@ import java.util.Locale;
 public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.DriverViewHolder> {
 
     private List<DriverModel> driverList;
-    private Context context; // Add context field
-
+    private Context context;
     public DriverAdapter(Context context, List<DriverModel> driverList) {
         this.context = context;
         this.driverList = driverList;
@@ -33,7 +30,6 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.DriverView
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_driver, parent, false);
         return new DriverViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull DriverViewHolder holder, int position) {
         DriverModel driver = driverList.get(position);
@@ -43,12 +39,10 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.DriverView
         String locationName = convertLatLngToLocationName(driver.getLatitude(), driver.getLongitude());
         holder.textLocation.setText(locationName);
     }
-
     @Override
     public int getItemCount() {
         return driverList.size();
     }
-
     static class DriverViewHolder extends RecyclerView.ViewHolder {
         TextView textBusNo, textName, textLocation;
 
@@ -59,7 +53,6 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.DriverView
             textLocation = itemView.findViewById(R.id.text_location);
         }
     }
-
     private String convertLatLngToLocationName(double latitude, double longitude) {
         Geocoder geocoder = new Geocoder(context.getApplicationContext(), Locale.getDefault());
         List<Address> addresses;
